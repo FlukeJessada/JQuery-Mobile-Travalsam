@@ -4,9 +4,9 @@
 	<meta charset='UTF-8'>
 	<title>Travalsam</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 	
-	<script src="jquery.mobile/jquery-1.11.1.min.js"></script>
-	<script src="jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
-	<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.4.5.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
 	<script src="js/jquery.excoloSlider.min.js"></script>
 	<link href="css/jquery.excoloSlider.css" rel="stylesheet">
 	<style>
@@ -74,29 +74,23 @@
 					$("#slider").excoloSlider();
 				});	
 			});
-			function F_TRAVEL(){
+			$(function F_TRAVEL(){
 				$.ajax({					
 					url 	: host+"api_tavel.php",
 					async	: false,
 					success : function(result){
 						var myjson = $.parseJSON(result);
-						listview_data = "";
+						listview_data = "<ul data-role='listview' data-inset='true'>";
 						$.each(myjson, function(index , val){							
 							listview_data +=
-							"<div class='ui-grid-a' onclick='F_TRAVELDETAIL("+val.id+")' class='ui-btn'>"+
-							"<div class='ui-block-a'>"+
-							"<div class='ui-bar' ui-bar-a style='height:100px'>"+
-							"<img src='images/"+val.image+"' width='100%'>"+
-							"</div></div><div class='ui-block-b'>"+
-							"<div class='ui-bar' ui-bar-a style='height:100px'>"+
-							"<h4 align='center'>"+val.name+"</h4>"+
-							"</div></div></div>";
+							"<li><a href= onclick='F_TRAVELDETAIL("+val.id+")'><img src='images/"+val.image+"' width='50%'>"+
+							"<h2>"+val.name+"</h2></a></li>";
 						});
+						listview_data += "</ul>";
 					}					
 				});				
 				$('#showpage').html(listview_data);
-			}				
-			F_TRAVEL();	
+			});
 			
 			function F_TRAVELSEARCH(){
 				$.ajax({
