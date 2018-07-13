@@ -4,7 +4,7 @@ var btn_back = 	"<a href='' class='ui-btn-left ui-btn ui-btn-b ui-btn-inline "+
 var listview_data = '';
 
 // The recommandation image slider
-$(function F_RECOMMANDED(){
+function F_RECOMMANDED(){
     $.ajax({					
 		url 	: host+"api_tavel.php",
 		async	: false,
@@ -18,11 +18,11 @@ $(function F_RECOMMANDED(){
 			});
 		}					
 	});				
-	$('#showslide').html("<div id='slider'>" + listview_data + "</div>");
+	$('#slideshow').html("<div id='slider'>" + listview_data + "</div>");
 	$(function () {
 		$("#slider").excoloSlider();
 	});	
-});
+}
 
 // First section of application
 function F_TRAVEL(){
@@ -31,22 +31,18 @@ function F_TRAVEL(){
 		async	: false,
 		success : function(result){
 			var myjson = $.parseJSON(result);
-			listview_data = "";
-		    $.each(myjson, function(index , val){							
-				listview_data += "<div class='ui-grid-a' onclick='F_TRAVELDETAIL("+val.id+")' class='ui-btn'>"+
-				    "<div class='ui-block-a'>"+
-					"<div class='ui-bar' ui-bar-a style='height:100px'>"+
-					"<img src='images/"+val.image+"' width='100%'>"+
-					"</div></div><div class='ui-block-b'>"+
-					"<div class='ui-bar' ui-bar-a style='height:100px'>"+
-					"<h4 align='center'>"+val.name+"</h4>"+
-					"</div></div></div>";
+			listview_data = "<ul data-role='listview' data-inset='true' class='ui-listview ui-listview-inset ui-corner-all ui-shadow'>";
+			$.each(myjson, function(index , val){							
+				listview_data += "<li class='ui-li-has-thumb'><a data-transition='slidefade' class="+
+				"'ui-btn ui-btn-icon-right ui-icon-carat-r' onclick='F_TRAVELDETAIL("+
+				val.id+")'><img src='images/"+val.image+"' width='100%'>"+
+				"<h2>"+val.name+"</h2></a></li>";
 			});
+			listview_data += "</ul>";
 		}					
 	});				
 	$('#showpage').html(listview_data);
 }				
-F_TRAVEL();
 			
 			function F_TRAVELSEARCH(){
 				$.ajax({
@@ -105,7 +101,7 @@ F_TRAVEL();
 				$('#form').hide();
 				$('#headers').html(names);
 				$('#topic').hide();
-				$('#header-left').html(btn_back);
+				$('#l-head').html(btn_back);
 			}
 			function F_GOMAPS(p1, p2) {				
 				localStorage.setItem("l_latitude", p1);

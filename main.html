@@ -23,11 +23,11 @@
 <div>
 	<div data-role="header" data-position="fixed">
 		<div id="header-left">
-			<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars">menu</a>
+			<a href="#leftpanel1" class="ui-btn-left ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars">menu</a>
 		</div>
 		<h1 id="headers">Travalsam</h1>
 		<div id="header-right">
-			<a href="#" class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-search">search</a>
+			<a href="" class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-search">search</a>
 		</div>
 	</div>
 	<div id="showslide"></div>
@@ -50,11 +50,14 @@
 		</form>
 		<p id='topic' style="text-align: center"><b>สำหรับคุณ</b></p>
 		<div id='showpage'></div>
-		<script>	
+		<script>
 			var host = "http://127.0.0.1/travel/api/";	
-			var btn_back = 	"<a href='' class='ui-btn-left ui-btn ui-btn-b ui-btn-inline "+
+			var btn_back = 	"<a data-transition='fade' class='ui-btn-left ui-btn ui-btn-b ui-btn-inline "+
 							"ui-mini ui-corner-all ui-btn-icon-notext ui-icon-carat-l' onclick='F_GORELOAD()'>back</a>";
 			var listview_data = '';
+
+			$( "#leftpanel1" ).trigger( "updatelayout" );
+
 			$(function F_RECOMMANDED(){
 				$.ajax({					
 					url 	: host+"api_tavel.php",
@@ -64,8 +67,8 @@
 						listview_data = "";
 						$.each(myjson, function(index , val){							
 							listview_data +=
-							"<a href='' onclick='F_TRAVELDETAIL("+val.id+")'>"+
-							"<img src='images/"+val.image+"' width='100%' data-plugin-slide-caption='<p>"+val.name+"</p>'></a>";
+							"<a href='' onclick='F_TRAVELDETAIL("+val.id+");'>"+
+							"<img src='images/"+val.image+"' width='100%' data-plugin-slide-caption='"+val.name+"'></a>";
 						});
 					}					
 				});				
@@ -83,7 +86,7 @@
 						listview_data = "<ul data-role='listview' data-inset='true' class='ui-listview ui-listview-inset ui-corner-all ui-shadow'>";
 						$.each(myjson, function(index , val){							
 							listview_data +=
-							"<li class='ui-li-has-thumb'><a href='' class='ui-btn ui-btn-icon-right ui-icon-carat-r' onclick='F_TRAVELDETAIL("+val.id+")'><img src='images/"+val.image+"' width='100%'>"+
+							"<li class='ui-li-has-thumb'><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' onclick='F_TRAVELDETAIL("+val.id+")'><img src='images/"+val.image+"' width='100%'>"+
 							"<h2>"+val.name+"</h2></a></li>";
 						});
 						listview_data += "</ul>";
@@ -161,6 +164,17 @@
 			}
 		</script>
 	</div>		
+</div>
+<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-a ui-panel-animate ui-panel-open">
+	<div class="ui-panel-inner">
+		<h3>Left Panel: Reveal</h3>
+		<p>This panel is positioned on the left with the reveal display mode. 
+			The panel markup is <em>after</em> the header, content and footer 
+			in the source order.</p><p>To close, click off the panel, swipe left or 
+				right, hit the Esc key, or use the button below:
+		</p>
+		<a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+	</div>
 </div>
 </body>
 </html>
