@@ -1,7 +1,4 @@
 var host = "http://127.0.0.1/travel/api/";	
-var collap_h = 	"<div data-role='collapsible' data-mini='true' class='ui-collapsible"+
-" ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed'"+
-" data-mini='true'>";
 var listview_data = '';
 
 // The recommandation image slider
@@ -59,12 +56,12 @@ function F_TRAVELSEARCH(){
 				listview_data += "<li class='ui-li-has-thumb'><a href='#content' data-transition='slidefade' class="+
 				"'ui-btn ui-btn-icon-right ui-icon-carat-r' data-transition='slidefade' onclick='F_TRAVELDETAIL("+
 				val.id+")'><img src='images/"+val.image+"' width='100%'>"+
-				"<h2>"+val.name+"</h2></a></li>";
+				"<h2>"+val.name+"</h2><p id='btn-des'>"+val.detail+"</p></a></li>";
 			});
 			listview_data += "</ul>";						
 		}					
 	});				
-	$('#showpage').html(listview_data);
+	$('#showresult').html(listview_data);
 }
 
 function F_TRAVELDETAIL(p1){				
@@ -85,8 +82,8 @@ function F_TRAVELDETAIL(p1){
 			"<h4>ข้อมูลเพิ่มเติม</h4>"+
 			"<p>"+myjson.detail+"</p></div></div>"+
 			"<div class='ui-grid-a'><div class='ui-block-a'>"+
-			"<a href='#map' class='ui-shadow ui-btn ui-corner-all' onclick='F_GOMAPS(\""+myjson.latitude+"\", \""+myjson.longitude+"\");'>Streetview</a></div>"+
-			"<div class='ui-block-b'><a class='ui-shadow ui-btn ui-corner-all'>นำทาง</a></div></div></div>";
+			"<a href='' class='ui-shadow ui-btn ui-corner-all' onclick='F_GOMAPS(\""+myjson.latitude+"\", \""+myjson.longitude+"\", \""+myjson.name+"\");'>แผนที่</a></div>"+
+			"<div class='ui-block-b'><a class='ui-shadow ui-btn ui-corner-all'>ให้คะแนน</a></div></div></div>";
 		}					
 	});
 
@@ -95,30 +92,14 @@ function F_TRAVELDETAIL(p1){
 	$('#form').hide();
 	$('#location').html(names);
 }
-			
-function F_GORELOAD() {						
+
+function F_GORELOAD() {
 	location.reload(); 
 }
 
-function F_GOMAPS(l1, l2) {
-	var latitude = l1;
-	var longitude = l2;
-	var mapOptions = {
-		scaleControl: true,
-		center		: new google.maps.LatLng(latitude, longitude),
-		zoom		: 18
-	};
-
-	var map 	= new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	var marker 	= new google.maps.Marker(
-		{
-			map		: map,
-			position: map.getCenter()
-		}
-	);
-	var infowindow = new google.maps.InfoWindow();
-	infowindow.setContent('<b>ประเทศไทย</b>');
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.open(map, marker);
-	});
+function F_GOMAPS(p1, p2, p3) {				
+	localStorage.setItem("l_latitude", p1);
+	localStorage.setItem("l_longitude", p2);
+	localStorage.setItem("s_name", p3)
+	window.location = "maps.html"; 
 }
