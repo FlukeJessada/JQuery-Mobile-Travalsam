@@ -1,59 +1,81 @@
 <!DOCTYPE html> 
 <html> 
 	<head> 
-	<meta charset='UTF-8'>
-	<title>สถานที่ท่องเที่ยวเขตธนบุรี</title> 
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 		
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&language=th"></script>
-	<script src="jquery.mobile/jquery.mobile-1.4.5.min.js"></script>	
-	<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.4.5.min.css" />
-	<style>
-		html, body, #map-canvas {
-			height	: 85%;
-			margin	: 0px;
-			padding	: 0px
-		}
-	</style>
-	<script>
-		function initialize() {
-			var latitude = localStorage.getItem("l_latitude");
-			var longitude = localStorage.getItem("l_longitude");
-			var mapOptions = {
-				scaleControl: true,
-				center		: new google.maps.LatLng(latitude, longitude),
-				zoom		: 18
-			};
+		<meta charset='UTF-8'>
+		<title>Maps</title> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 	
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&language=th"></script>	
+		<script src="js/jquery-1.12.4.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+		<style>
+			#map, #pano {
+				float: left;
+				height: 100%;
+				width: 45%;
+			}
+		</style>
+		<script>
+			function initialize() {
+				var latitude = localStorage.getItem("l_latitude");
+				var longitude = localStorage.getItem("l_longitude");
+				var mapOptions = {
+					scaleControl: true,
+					center		: new google.maps.LatLng(latitude, longitude),
+					zoom		: 18
+				};
 
-			var map 	= new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-			var marker 	= new google.maps.Marker(
-				{
+				var map 	= new google.maps.Map(document.getElementById('map'), mapOptions);
+				var marker 	= new google.maps.Marker({
 					map		: map,
 					position: map.getCenter()
-				}
-			);
-			var infowindow = new google.maps.InfoWindow();
-			infowindow.setContent('<b>ประเทศไทย</b>');
-			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.open(map, marker);
-			});
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
-</head> 
-<body> 
-	<!-- Written by Asst.prof.Dr.Taskeow Srisod	-->
-	<div id='headers' class="ui-bar ui-bar-a" style='background:#59544C; text-align:center; padding:20px;'>
-		<h3 style='color:#FFFFFF'> แผนที่ </h3>
-	</div>	
-	<div id='map-canvas'></div>
-	<div class="ui-body">
-		<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l" onclick="F_GOINDEX()"> ย้อนกลับ </button>	
-	</div>
-	<h4 class="ui-bar ui-bar-a" style='padding-top:10px; padding-bottom:10px; background:#59544C; text-align:right; color:#FFFFFF'>by Asst.Prof.Dr.Taskeow Srisod</h4>
-	<script>
-		function F_GOINDEX() {						
-			window.location = "main.html"; 
-		}
-	</script>
-</body>
+				});
+
+				var infowindow = new google.maps.InfoWindow();
+				infowindow.setContent('<b>ประเทศไทย</b>');
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+
+			function GOHOME() {
+				window.location = "main.html";
+			}
+		</script>
+	</head> 
+	<body> 
+		<!-- Content -->
+        <div data-role="page">
+            <!-- Header -->
+            <div data-role="header">
+                <a href="" onclick="GOHOME();" class="ui-btn-left ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-carat-l">back</a>
+                <h1 id="location">Streetview</h1>
+			</div>
+
+			<!-- Main -->
+			<div data-role="main" style="overflow:hidden;">
+				<div data-role="tabs" id="tabs">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#mapp">แผนที่</a></li>
+							<li><a href="#street">Streetview</a></li>
+							<li><a href="#mapn">นำทาง</a></li>
+						</ul>
+					</div>
+					<div class="ui-content" id="mapp">
+							<div id="map">1</div>
+						</div>
+			
+						<div class="ui-content" id="street">
+							<div id="pano">2</div>
+						</div>
+			
+						<div class="ui-content" id="mapn">
+							<div id="mapnav">3</div>
+					</div>
+				</div>
+			</div>
+        </div>
+	</body>
 </html>

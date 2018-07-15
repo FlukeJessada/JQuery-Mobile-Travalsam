@@ -83,7 +83,7 @@ function F_TRAVELDETAIL(p1){
 			"<p>"+myjson.detail+"</p></div></div>"+
 			"<div class='ui-grid-a'><div class='ui-block-a'>"+
 			"<a href='' class='ui-shadow ui-btn ui-corner-all' onclick='F_GOMAPS(\""+myjson.latitude+"\", \""+myjson.longitude+"\", \""+myjson.name+"\");'>แผนที่</a></div>"+
-			"<div class='ui-block-b'><a class='ui-shadow ui-btn ui-corner-all'>ให้คะแนน</a></div></div></div>";
+			"<div class='ui-block-b'><a class='ui-shadow ui-state-disabled ui-btn ui-corner-all'>ให้คะแนน</a></div></div></div>";
 		}					
 	});
 
