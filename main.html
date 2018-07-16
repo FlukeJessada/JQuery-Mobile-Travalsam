@@ -62,6 +62,8 @@
             <!-- Main -->
             <div data-role="main" class="ui-content">
                 <div id="showcontent"></div>
+                <h4 style="text-align: center">ความคิดเห็น</h4>
+                <div id="showcomment"></div>
             </div>
         </div>
 
@@ -98,9 +100,27 @@
             <!-- Content -->
             <div data-role="main" class="ui-content">
                 <form id='form'>
-                    <input type="text" name="dkey" value="" placeholder="ค้นหา" data-theme="a" onkeypress="return F_TRAVELSEARCH()">
+                    <input type="search" name="dkey" data-clear-btn="true" placeholder="ค้นหา" data-theme="a" onkeypress="return F_TRAVELSEARCH()">
                 </form>
                 <div id='showresult'></div>
+            </div>
+        </div>
+
+        <!-- Page 5 Comment -->
+        <div data-role="page" id="comment">
+            <!-- Header -->
+            <div data-role="header" data-position="fixed">
+                <a href="#content" class="ui-btn-left ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-carat-l">back</a>
+                <h4 id="header">เขียนข้อคิดเห็น</h4>
+            </div>
+
+            <!-- Main -->
+            <div data-role="main" class="ui-content">
+                <form id='com'>
+                    <input type="text" placeholder="ชื่อผู้เขียน">
+                    <textarea name="TAcomment" placeholder="เขียนข้อคิดเห็น"></textarea>
+                    <a href="#content" onclick="return F_COMMENT();" class="ui-shadow ui-btn ui-corner-all ui-btn-b">ส่ง</a>
+                </form>
             </div>
         </div>
 

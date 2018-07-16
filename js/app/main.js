@@ -1,5 +1,6 @@
 var host = "http://127.0.0.1/travel/api/";	
 var listview_data = '';
+var comment_data = '';
 
 // The recommandation image slider
 function F_RECOMMANDED(){
@@ -83,13 +84,11 @@ function F_TRAVELDETAIL(p1){
 			"<p>"+myjson.detail+"</p></div></div>"+
 			"<div class='ui-grid-a'><div class='ui-block-a'>"+
 			"<a href='' class='ui-shadow ui-btn ui-corner-all' onclick='F_GOMAPS(\""+myjson.latitude+"\", \""+myjson.longitude+"\", \""+myjson.name+"\");'>แผนที่</a></div>"+
-			"<div class='ui-block-b'><a class='ui-shadow ui-state-disabled ui-btn ui-corner-all'>ให้คะแนน</a></div></div></div>";
+			"<div class='ui-block-b'><a href='#comment' class='ui-shadow ui-btn ui-corner-all'>เขียนความคิดเห็น</a></div></div></div>";
 		}					
 	});
-
 	$('#showcontent').html(listview_data_detail);
 	$('#topic_form').hide();
-	$('#form').hide();
 	$('#location').html(names);
 }
 
