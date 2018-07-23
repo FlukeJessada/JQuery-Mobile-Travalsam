@@ -13,9 +13,6 @@
         <script type="text/javascript" src="js/app/main.js"></script>
         <title>Travelsam</title>
     </head>
-    <style>
-        .ui-page { -webkit-backface-visibility: hidden; }
-    </style>
     <body onload="F_RECOMMANDED(); F_TRAVEL();">
 
         <!-- Page 1 Home -->
@@ -116,11 +113,9 @@
 
             <!-- Main -->
             <div data-role="main" class="ui-content">
-                <form id='com'>
-                    <input type="text" placeholder="ชื่อผู้เขียน">
-                    <textarea name="TAcomment" placeholder="เขียนข้อคิดเห็น"></textarea>
-                    <a href="#content" onclick="return F_COMMENT();" class="ui-shadow ui-btn ui-corner-all ui-btn-b">ส่ง</a>
-                </form>
+                <input type="text" id="name" placeholder="ชื่อผู้เขียน">
+                <textarea id="comment" placeholder="เขียนข้อคิดเห็น"></textarea>
+                <a href="#content" onclick="return F_TRAVELCOMMENT();" class="ui-shadow ui-btn ui-corner-all ui-btn-b">ส่ง</a>
             </div>
         </div>
 

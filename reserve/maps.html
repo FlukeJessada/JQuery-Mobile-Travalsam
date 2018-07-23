@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<meta charset='UTF-8'>
+		<title>Maps</title> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 		
+		<script src="js/jquery-1.12.4.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&language=th"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+		<script>
+			function initialize() {
+				var latitude = localStorage.getItem("l_latitude");
+				var longitude = localStorage.getItem("l_longitude");
+				var name = localStorage.getItem("s_name");
+				var mapOptions = {
+					scaleControl: true,
+					center		: new google.maps.LatLng(latitude, longitude),
+					zoom		: 18
+				};
+
+				var map 	= new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				var marker 	= new google.maps.Marker(
+					{
+						map		: map,
+						position: map.getCenter()
+					}
+				);
+				var infowindow = new google.maps.InfoWindow();
+				infowindow.setContent("<b>"+name+"</b>");
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+
+
+			function GOHOME() {
+				window.location = "main.html";
+			}
+		</script>
+		<style>
+			#map-canvas, #pano {
+				height: 500px;
+				padding: 0px;
+				margin: 0px;
+			}
+		</style>
+	</head> 
+	<body> 
+        <div data-role="header">
+            <a href="" onclick="GOHOME();" class="ui-btn-left ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-carat-l">back</a>
+            <h1 id="location">Streetview</h1>
+		</div>
+		<div data-role="tabs" id="tabs">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#mapp">แผนที่</a></li>
+					<li><a href="#street">Streetview</a></li>
+					<li><a href="#mapn">นำทาง</a></li>
+				</ul>
+			</div>
+			<div id="mapp">
+				<div id="map-canvas"></div>
+			</div>
+			<div id="street">
+				<div id="pano"></div>
+			</div>
+			<div id="mapn">
+				<div id="mapnav"></div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -65,7 +65,7 @@ function F_TRAVELSEARCH(){
 	$('#showresult').html(listview_data);
 }
 
-function F_TRAVELDETAIL(p1){				
+function F_TRAVELDETAIL(p1){			
 	var tvObj 	= {"dkey":p1}
 	var tvJSON = JSON.stringify(tvObj);
 	var names	= '';
@@ -90,6 +90,23 @@ function F_TRAVELDETAIL(p1){
 	$('#showcontent').html(listview_data_detail);
 	$('#topic_form').hide();
 	$('#location').html(names);
+}
+
+function F_TRAVELCOMMENT(p1) {
+	var name = document.getElementById("name").values;
+	var comment = document.getElementById("comment").values;
+	var comObj = {"dkey":p1, "name":name, "comment":comment}
+	var comJSON = JSON.stringify(comObj);
+	$.ajax({
+		data	: "data="+comJSON,
+		type	: 'POST',
+		url		: host+"api_travel_comment.php",
+		async	: false,
+		success	: function (result) {
+			var myjson = $.parseJSON(result);
+		}
+	});
+	window.location = "main.html#content";
 }
 
 function F_GORELOAD() {
