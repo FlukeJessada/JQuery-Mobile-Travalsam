@@ -11,7 +11,7 @@ function F_RECOMMANDED(){
 		    var myjson = $.parseJSON(result);
             listview_data = "";
             $.each(myjson, function(index , val){							
-				listview_data += "<a href='#content' data-transition='slidefade' onclick='F_TRAVELDETAIL("+val.id+")'>"+
+				listview_data += "<a href='#content' data-transition='slidefade' onclick='F_TRAVELDETAIL("+val.id+"); F_COMMENT("+val.id+");'>"+
                 "<img src='images/"+val.image+"' width='100%' data-plugin-slide-caption='<p>"+
                 val.name+"</p>'></a>";
 			});
@@ -34,7 +34,7 @@ function F_TRAVEL(){
 			$.each(myjson, function(index , val){							
 				listview_data += "<li class='ui-li-has-thumb'><a href='#content' data-transition='slidefade' class="+
 				"'ui-btn ui-btn-icon-right ui-icon-carat-r' data-transition='slidefade' onclick='F_TRAVELDETAIL("+
-				val.id+")'><img src='images/"+val.image+"' width='100%'>"+
+				val.id+"); F_COMMENT("+val.id+");'><img src='images/"+val.image+"' width='100%'>"+
 				"<h2>"+val.name+"</h2><p id='btn-des'>"+val.detail+"</p></a></li>";
 			});
 			listview_data += "</ul>";
@@ -56,7 +56,7 @@ function F_TRAVELSEARCH(){
 			$.each(myjson, function(index , val){							
 				listview_data += "<li class='ui-li-has-thumb'><a href='#content' data-transition='slidefade' class="+
 				"'ui-btn ui-btn-icon-right ui-icon-carat-r' data-transition='slidefade' onclick='F_TRAVELDETAIL("+
-				val.id+")'><img src='images/"+val.image+"' width='100%'>"+
+				val.id+"); F_COMMENT("+val.id+");'><img src='images/"+val.image+"' width='100%'>"+
 				"<h2>"+val.name+"</h2><p id='btn-des'>"+val.detail+"</p></a></li>";
 			});
 			listview_data += "</ul>";						
@@ -65,7 +65,8 @@ function F_TRAVELSEARCH(){
 	$('#showresult').html(listview_data);
 }
 
-function F_TRAVELDETAIL(p1){			
+function F_TRAVELDETAIL(p1){
+	localStorage.setItem("dkey", p1);
 	var tvObj 	= {"dkey":p1}
 	var tvJSON = JSON.stringify(tvObj);
 	var names	= '';
@@ -79,12 +80,12 @@ function F_TRAVELDETAIL(p1){
 			names = myjson.name;
 			listview_data_detail = "";
 			listview_data_detail +=	"<img src='images/"+myjson.image+"' width='100%'>"+
-			"<div class='ui-grid-solo'><div class='ui-block-a'><div>"+
+			"<div class='ui-body ui-body-a ui-corner-all'>"+
 			"<h4>ข้อมูลเพิ่มเติม</h4>"+
-			"<p>"+myjson.detail+"</p></div></div>"+
+			"<p>"+myjson.detail+"</p></div>"+
 			"<div class='ui-grid-a'><div class='ui-block-a'>"+
 			"<a href='' class='ui-shadow ui-btn ui-corner-all' onclick='F_GOMAPS(\""+myjson.latitude+"\", \""+myjson.longitude+"\", \""+myjson.name+"\");'>แผนที่</a></div>"+
-			"<div class='ui-block-b'><a href='#comment' class='ui-shadow ui-btn ui-corner-all'>เขียนความคิดเห็น</a></div></div></div>";
+			"<div class='ui-block-b'><a href='#comment' class='ui-shadow ui-btn ui-corner-all'>เขียนความคิดเห็น</a></div></div>";
 		}					
 	});
 	$('#showcontent').html(listview_data_detail);
@@ -92,21 +93,41 @@ function F_TRAVELDETAIL(p1){
 	$('#location').html(names);
 }
 
-function F_TRAVELCOMMENT(p1) {
-	var name = document.getElementById("name").values;
-	var comment = document.getElementById("comment").values;
+function F_COMMENT(p1) {
+	var tvObj 	= {"dkey":p1}
+	var tvJSON = JSON.stringify(tvObj);
+	$.ajax({
+		type	: 'POST',
+		data	: "data="+tvJSON,					
+		url 	: host+"api_comment_display.php",
+		async	: false,
+		success : function(result){
+			var myjson = $.parseJSON(result);
+			listview_data = "";
+			$.each(myjson, function(index , val){
+				listview_data += "<div class='ui-body ui-body-a ui-corner-all'>"+
+				"<h4>"+val.name+"</h4><p>"+val.comment+"</p></div><br>";
+			});
+		}
+	});
+	$('#showcomment').html(listview_data);
+}
+
+function F_TRAVELCOMMENT() {
+	var p1 = localStorage.getItem("dkey");
+	var name = document.getElementById("name").value;
+	var comment = document.getElementById("comment").value;
 	var comObj = {"dkey":p1, "name":name, "comment":comment}
 	var comJSON = JSON.stringify(comObj);
 	$.ajax({
 		data	: "data="+comJSON,
 		type	: 'POST',
-		url		: host+"api_travel_comment.php",
+		url		: host+"api_comment.php",
 		async	: false,
 		success	: function (result) {
 			var myjson = $.parseJSON(result);
 		}
 	});
-	window.location = "main.html#content";
 }
 
 function F_GORELOAD() {

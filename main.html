@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
         <link rel="stylesheet" href="css/jquery.excoloSlider.css">
         <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="css/themes/nxz.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
         <script type="text/javascript" src="js/app/main.js"></script>
         <title>Travelsam</title>
     </head>
@@ -113,9 +115,11 @@
 
             <!-- Main -->
             <div data-role="main" class="ui-content">
-                <input type="text" id="name" placeholder="ชื่อผู้เขียน">
-                <textarea id="comment" placeholder="เขียนข้อคิดเห็น"></textarea>
-                <a href="#content" onclick="return F_TRAVELCOMMENT();" class="ui-shadow ui-btn ui-corner-all ui-btn-b">ส่ง</a>
+                <form id='form'>
+                    <input type="text" id="name" name="name" placeholder="ชื่อผู้เขียน">
+                    <textarea name="comment" id="comment" placeholder="เขียนข้อคิดเห็น"></textarea>
+                    <a href="#content" onclick="return F_TRAVELCOMMENT()" class="ui-shadow ui-btn ui-corner-all ui-btn-b">ส่ง</a>
+                </form>
             </div>
         </div>
 
