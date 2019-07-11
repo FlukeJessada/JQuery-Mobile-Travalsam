@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0px;
+	padding:0px;
+	border:0px;	
+}
+
+body{	
+	background-color:#ececec;
+}
+
+.main-frame{
+	background-color:#000000;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	position:relative;
+	z-index:1;
+}
+
+.second-frame{
+	height:100%;
+	border:solid 20px #000;
+	border-radius:40px;
+	border-bottom:solid 80px #000;
+	border-top:solid 60px #000;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	z-index:2;
+}
+
+.third-frame{
+	height:100%;
+	background-color:#ccc;
+	padding:5px;
+	border-radius:45px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:80px;
+}
+
+.frame-scroll-correction{
+	position:absolute;
+	height:100%;
+	width:22px;
+	background-color:#000;	
+	z-index:99;
+	right:-20px;
+}
+
+.resolution-selecter-deploy em{
+	float:right;	
+	padding-right:20px;
+	font-size:19px;
+	font-style:normal;
+}
+
+.resolution-selecter-deploy{
+	width:170px;
+	height:50px;
+	background-color:#202428;
+	color:#efefef;
+	font-family:'Roboto', sans-serif;
+	text-decoration:none;
+	line-height:50px;
+	font-size:12px;
+	padding-left:20px;
+	padding-right:00px;
+	display:block;
+}
+
+.resolution-selecter{
+	position:absolute;
+	right:20px;
+	top:20px;
+	z-index:9999;
+}
+
+.resolutions{
+	height:0px;
+	transition:all 500ms ease;
+	overflow:hidden;
+}
+
+.resolutions a{
+	transition:all 200ms ease;	
+}
+
+.active-resolution{
+	background-color:rgba(39, 174, 96,1.0)!important;
+	transition:all 200ms ease;
+}
+
+.show-resolutions{
+	min-height:300px!important;
+	transition:all 500ms ease;	
+}
+
+.resolutions a{
+	font-family:'Roboto', sans-serif;
+	font-size:13px;
+	display:block;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-color:#202428;
+	opacity:0.9;
+	height:40px;
+	line-height:40px;
+	color:#ffffff;
+	text-decoration:none;
+	padding-left:20px;
+}
+
+.remove-border *{
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	margin:0px;
+	border:none!important;
+	width:100%!important;
+	height:100%!important;
+	background-color:transparent;
+	z-index:0;
+	transition:all 200ms ease;
+}
+
+.mobiles-disabled{display:none;}
+
+.tablets-disabled .inch-80{	display:none!important;	}

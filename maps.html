@@ -1,0 +1,111 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<meta charset='UTF-8'>
+	<title>สถานที่ท่องเที่ยวเขตธนบุรี</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 		
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>	
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+	<style>
+			/* Always set the map height explicitly to define the size of the div
+			 * element that contains the map. */
+			#map, #pano {
+			  height: 50%;
+			}
+			/* Optional: Makes the sample page fill the window. */
+			html, body {
+			  height: 100%;
+			  margin: 0;
+			  padding: 0;
+			}
+			#floating-panel {
+			  position: absolute;
+			  top: 10px;
+			  left: 25%;
+			  z-index: 5;
+			  background-color: #fff;
+			  padding: 5px;
+			  border: 1px solid #999;
+			  text-align: center;
+			  font-family: 'Roboto','sans-serif';
+			  line-height: 30px;
+			  padding-left: 10px;
+			}
+	</style>
+</head>
+<body>
+	<!-- Written by Asst.prof.Dr.Taskeow Srisod	-->
+	<div id='headers' class="ui-bar ui-bar-a" text-align:center; padding:20px;>
+		<h3 style='color:#000000'> แผนที่ </h3>
+	</div>	
+</div>
+<div id="floating-panel">
+<b>โหมดการท่องเที่ยว: </b>
+<select id="mode">
+  <option value="DRIVING">การขับรถ</option>
+  <option value="WALKING">การเดิน</option>
+  <option value="BICYCLING">การขี่จักรยาน</option>
+  <option value="TRANSIT">การขนส่ง</option>
+</select>
+</div>
+<div id="map"></div>
+<div id="pano"></div>
+<script>
+  var latitude = localStorage.getItem("l_latitude");
+		var longitude = localStorage.getItem("l_longitude");
+		var name = localStorage.getItem("s_name");
+  function initMap() {
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+	var directionsService = new google.maps.DirectionsService;
+	var map = new google.maps.Map(document.getElementById('map'), {
+	  zoom: 14,
+	  center: {lat: 13.523570, lng: 100.754030}
+	});
+	var panorama = new google.maps.StreetViewPanorama(
+		document.getElementById('pano'), {
+		  position: new google.maps.LatLng(latitude, longitude),
+		  pov: {
+			heading: 34,
+			pitch: 10
+		  }
+		});
+	map.setStreetView(panorama)
+	directionsDisplay.setMap(map);
+
+	calculateAndDisplayRoute(directionsService, directionsDisplay);
+	document.getElementById('mode').addEventListener('change', function() {
+	  calculateAndDisplayRoute(directionsService, directionsDisplay);
+	});
+  }
+
+	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+		var selectedMode = document.getElementById('mode').value;
+		directionsService.route({
+		origin: {lat: 13.523570, lng: 100.754030},  // Haight.
+		destination: new google.maps.LatLng(latitude, longitude),  // Ocean Beach.
+		// Note that Javascript allows us to access the constant
+		// using square brackets and a string value as its
+		// "property."
+			travelMode: google.maps.TravelMode[selectedMode]
+			}, function(response, status) {
+			if (status == 'OK') {
+				directionsDisplay.setDirections(response);
+			} else {
+				window.alert('Directions request failed due to ' + status);
+			}
+		});
+  	}
+	</script>
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBN-DhMoFRmStg1qGw4-G1UTt7WI2h3EgA&callback=initMap">
+	</script>
+	<div class="ui-body">
+		<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l" onclick="F_GOINDEX()"> ย้อนกลับ </button>	
+	</div>
+	<script>
+		function F_GOINDEX() {						
+			window.location = "main.html"; 
+		}
+	</script>
+</body>
+</html>
