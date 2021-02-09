@@ -1,10 +1,23 @@
-# JQuery-Mobile-Travalsam
-Travelsam - Travel recommendation Web-Apps in Samut Prakarn. Province of Thailand
+# TravelSam
 
-## TravelSam
-This Mini-Project is a Web-Base Application create with Jquery Moblie
-to study how framework works and how to link application with api.
+TravelSam is a Attractions recommendation application in Samut Prakan, Thailand.
 
-~~*Discalmer: This Repository will not update anymore. So use it carefully.*~~
+This Mini-Project is a Web-Base Application create with JQuery Moblie to study how framework works and how to link application with API.
 
-~~**_update:_** Now I currenly maintain this project as free time hobby. So I will update javascript to ES6 standard and convert this application to new framework.~~
+## Deployment
+
+TODO
+
+## API
+
+TODO
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[]()
